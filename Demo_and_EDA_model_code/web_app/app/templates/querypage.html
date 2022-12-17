@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <script src="https://d3js.org/d3.v4.js"></script>
+    <title>Fair price prediction for used cars</title>
+    <style>
+        body {
+            background-image: url('https://di-uploads-pod2.dealerinspire.com/iclautos/uploads/2017/07/slide-2.jpg');
+        }
+        .header {
+            
+            background-color:#dad5c0;
+            margin:auto;
+            opacity: 0.7;
+
+        }
+        .dropdown-box {
+            width: 200px;
+            height: 40px;
+            border: 2px solid silver;
+            border-radius: 5px;
+            overflow: hidden;
+            font-weight: bold;
+            font-size:large;
+            background: #f7f6f2;
+        }
+
+        .wrapper {
+            display: grid;
+            
+            padding-left: 100px;
+            grid-template-columns: 225px 225px 225px 225px 225px;
+            grid-template-rows: 130px 130px 130px 50px;
+            grid-gap: 20px;
+            color: #ccc;
+        }
+
+        .box {
+            background-color: #5788b3;
+            color: black;
+            opacity: 0.9;
+            border-radius: 10px;
+            padding: 20px;
+            font-size: 150%;
+            font-family: 'Monaco'
+        }
+
+        .submitbox {
+            margin: auto;
+            width: 200px;
+            color: white;
+            background-color: #5788b3;
+            opacity: 0.7;
+            padding: 20px;
+            border-radius: 10px;
+            font-size: 150%;
+            font-family: 'Courier New'
+            
+        }
+        footer { 
+            display: block;
+            background-color: #dad5c0;
+            }
+
+        #sub {
+            width: 200px;
+            height: 100px;
+            text-align: center;
+            border-radius: 14px;
+            font-size: 18px;
+        }
+
+        #sub:hover {
+            background-color: darkcyan;
+            transition: 0.3s;
+        }
+
+        #submit:hover{
+            background-color: gold;
+        }
+    </style>
+</head>
+
+<form action="" method="post" class="body">
+<div class = "header">
+    <h1 style="color:#1a1f29;text-align:center;font-family: New;font-size:250%;font-weight:bolder;">Car Price Prediction
+    </h1>
+    <p style="color:#1a1f29;text-align:center;font-family:Courier New;font-size:110%">
+    This website analyzes 80k used cars listings from Craigslist and other sources
+    </p>
+    <p style="color:#1a1f29;text-align:center;font-family:Courier New;font-size:110%">
+    Then, feeds that information into a ML model to determine the "fairest price" for listing or buying
+    </p>
+    <p style="color:#1a1f29;text-align:center;font-family:Courier New;font-size:110%">
+    Website created by Ming, Zac, and Pair for Big Data Analytics
+    <br><br>
+    </p>
+</div>
+<div class="wrapper">
+    <div class="box b" id="sub">
+        <h3>Manufacturer</h3>
+        <select class="dropdown-box" name="Manufacturer"  required="required">
+            <option value="toyota"> toyota </option>
+            <option value="ford"> ford</option>
+            <option value="honda">honda</option>
+            <option value="dodge">dodge</option>
+            <option value="chrysler">chrysler </option>
+            <option value="chevrolet"> chevrolet </option>
+            <option value="jeep"> jeep</option>
+            <option value="lexus"> lexus</option>
+            <option value="bmw"> bmw</option>
+            <option value="gmc"> gmc</option>
+            <option value="mercedes.benz"> mercedes-benz</option>
+            <option value="mazda"> mazda</option>
+            <option value="rover">rover </option>
+            <option value="ram"> ram</option>
+            <option value="nissan">nissan </option>
+            <option value="ferrari"> audi </option>
+            <option value="volkswagen"> volkswagen</option>
+            <option value="kia"> kia</option>
+            <option value="pontiac"> pontiac</option>
+            <option value="hyundai"> hyundai</option>
+            <option value="acura"> acura</option>
+            <option value="cadillac"> cadillac</option>
+            <option value="lincoln"> lincoln</option>
+            <option value="buick">buick </option>
+            <option value="subaru"> subaru</option>
+            <option value="other"> other</option>
+        </select>
+    </div>
+
+    <div class="box a" id="sub">
+        <h3>Model</h3><input  class="dropdown-box" name="Model" required="required">
+    </div>
+
+    <div class="box c" id="sub">
+        <h3>Make Year</h3><input class="dropdown-box"  name="Year" type="number" required="required">
+    </div>
+
+    <div class="box d" id="sub">
+        <h3>Odometer</h3><input class="dropdown-box"  name="miles" required="required">
+    </div>
+
+    <div class="box e" id="sub">
+        <h3>Fuel type</h3>
+        <select name="Fuel" class="dropdown-box"  required="required">
+            <option value="Gas">Gas</option>
+            <option value="Hybrid"> Hybrid</option>
+            <option value="Diesel">Diesel</option>
+        </select>
+    </div>
+
+    <div class="box f" id="sub">
+        <h3>Condition</h3>
+        <select name="Condition" class="dropdown-box" required="required">
+            <option value=20> New </option>
+            <option value=15> Like New </option>
+            <option value=10> Excellent </option>
+            <option value=6> Good </option>
+            <option value=3> Fair </option>
+            <option value=0> Salvage </option>
+        </select>
+    </div>
+    <div class="box g" id="sub">
+        <h3>Cylinders</h3>
+        <select name="Cylinders"  class="dropdown-box" required="required">
+            <option value="4"> 4 </option>
+            <option value="6"> 6 </option>
+            <option value="8"> 8 </option>
+        </select>
+    </div>
+
+    <div class="box i" id="sub">
+        <h3>Transmission</h3>
+        <select name="Transmission" class="dropdown-box"  required="required">
+            <option value="Automatic">Automatic Car</option>
+            <option value="Manual">Manual Car</option>
+            <option value="other"> other </option>
+        </select>
+    </div>
+
+    <div class="box j" id="sub">
+        <h3> Drive </h3>
+        <select name="Drive" class="dropdown-box"  required="required">
+            <option value="rwd">rwd</option>
+            <option value="4wd">4wd</option>
+            <option value="fwd">fwd</option>
+        </select>
+    </div>
+    <div class="box k" id="sub">
+        <h3> Size </h3>
+        <select name="Size"  class="dropdown-box"  required="required">
+            <option value="full.size"> full-size</option>
+            <option value="mid.size"> mid-size</option>
+            <option value="compact"> compact</option>
+            <option value="sub.compact"> sub-compact</option>
+        </select>
+    </div>
+
+    <div class="box l" id="sub">
+        <h3> Type </h3>
+        <select name="Type" class="dropdown-box" required="required">
+            <option value="sedan"> sedan</option>
+            <option value="truck"> truck</option>
+            <option value="pickup"> pickup</option>
+            <option value="mini.van"> mini-van</option>
+            <option value="offroad"> offroad</option>
+            <option value="bus"> bus</option>
+            <option value="van">van </option>
+            <option value="SUV">SUV </option>
+            <option value="convertible"> convertible</option>
+            <option value="coupe"> coupe</option>
+            <option value="hatchback">hatchback</option>
+            <option value="wagon"> wagon</option>
+            <option value="other"> other</option>
+        </select>
+    </div>
+
+    <div class="box m" id="sub">
+        <h3> Paint Color </h3>
+        <select name="Paint" class="dropdown-box" required="required">
+            <option value="black"> black</option>
+            <option value="blue"> blue</option>
+            <option value="silver"> silver</option>
+            <option value="white"> white</option>
+            <option value="grey"> grey</option>
+            <option value="red"> red</option>
+            <option value="other"> other </option>
+        </select>
+    </div>
+
+    <div class="box n" id="sub">
+        <h3>Buy/Sell</h3>
+        <select name="Seller_Type_Individual" class="dropdown-box"  required="required">
+            <option value="Buyer">Buyer</option>
+            <option value="Seller">Seller</option>
+        </select>
+    </div>
+
+    <div class="box p" id="sub">
+        <h3>Your zip</h3><input  class="dropdown-box"  name="Zipcode" required="required">
+    </div>
+
+    <div class="box p" id="sub">
+        <h3>St. income</h3><input  class="dropdown-box" name="State_income" required="required">
+    </div>
+</div>
+<div class="submitbox" style="color:rgb(255, 237, 74)">
+    <button id="submit" class="dropdown-box" type="submit ">Calculate fair price</button>
+</div>
+<br>
+<footer>
+    <p>© 2022 Fair Price Prediction for Used Cars. All rights reserved.</p>
+  </footer>
+</form>
+<html>
