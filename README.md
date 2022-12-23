@@ -23,6 +23,7 @@ scrape existing listings and their links/pricing, and more.
     called Vehicles.csv
 
 # Tree with summary
+```
 Demo_and_EDA_model_code
     /web_app
         /templates
@@ -38,3 +39,4 @@ Demo_and_EDA_model_code
     ML & DL Models.ipynb (Generate the models)
     one_hotted_training_data.csv (Data with one-hotting)
     state_income.csv (Used in data_processing)
+```
