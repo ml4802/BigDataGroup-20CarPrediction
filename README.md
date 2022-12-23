@@ -10,19 +10,19 @@ that, once given some information about a car, will predict the fairest price fo
 car based on previous listings, predict similar car prices for bracketing model years,
 scrape existing listings and their links/pricing, and more. 
 
-##How to run web demo:
+## How to run web demo:
     Run app.py inside web_app, and navigate to http://127.0.0.1:5000
     to view the webpage
     Must run on tensorflow-enabled computer
 
-##How to process raw Kaggle data:
+## How to process raw Kaggle data:
     See data_processing.R for instructions on how to transform Craigslist
     Kaggle dataset into data_with_income.csv, and one_hotted_training_data.csv
     Dataset used to train models and generate R is at
     https://www.kaggle.com/datasets/austinreese/craigslist-carstrucks-data
     called Vehicles.csv
 
-#Tree with summary
+# Tree with summary
 Demo_and_EDA_model_code
     /web_app
         /templates
